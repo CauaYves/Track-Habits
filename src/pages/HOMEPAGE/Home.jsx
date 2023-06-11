@@ -9,10 +9,12 @@ import COLORS from "../../constants/colors"
 import axios from "axios"
 import urlApi from "../../constants/fetchApi"
 import TrackBar from "../../components/TrackBar"
+import HabitInput from "../../components/habitInput"
 
 export default function Home() {
     const navigate = useNavigate()
     const [habits, setHabits] = useState([])
+    const [createHabit, setCreateHabit] = useState(false)
 
     useEffect(() => {
         const { token } = getUserDataFromLocals()
@@ -21,7 +23,7 @@ export default function Home() {
         axios
             .get(`${urlApi}/habits`, { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setHabits(res.data))
-    }, [])
+    }, [navigate])
 
     return (
         <Main>
@@ -29,11 +31,12 @@ export default function Home() {
             <HomeContainer>
                 <Flex>
                     <h1>Meus hábitos</h1>
-                    <IconContainer>
+                    <IconContainer onClick={() => setCreateHabit(true)}>
                         <FaPlus size={20} color="white" />
                     </IconContainer>
                 </Flex>
                 <HabitsContainer>
+                    {createHabit ? <HabitInput isOpen={setCreateHabit} /> : null}
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {
@@ -42,7 +45,7 @@ export default function Home() {
                     }
                 </HabitsContainer>
             </HomeContainer>
-            <TrackBar/>
+            <TrackBar />
         </Main>
     )
 }
@@ -56,7 +59,7 @@ const HomeContainer = styled.main`
     margin: auto;
 `
 const Flex = styled.div`
-    height: 120px;
+    height: 80px;
 
     display: flex;
     align-items: center;
@@ -80,5 +83,6 @@ const HabitsContainer = styled.section`
     width: 100%;
     h1{
         color: ${COLORS.TEXT};
+        margin: 30px 0px;
     }
 `

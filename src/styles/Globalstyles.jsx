@@ -15,6 +15,9 @@ export const GlobalStyle = createGlobalStyle`
       outline: 0;
     }
   }
+  button{
+    border: none;
+  }
 
   a{
     color: black;
