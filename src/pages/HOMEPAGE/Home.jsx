@@ -10,6 +10,7 @@ import axios from "axios"
 import urlApi from "../../constants/fetchApi"
 import TrackBar from "../../components/TrackBar"
 import HabitInput from "../../components/habitInput"
+import Habit from "../../components/Habit"
 
 export default function Home() {
     const navigate = useNavigate()
@@ -33,15 +34,16 @@ export default function Home() {
                 <Flex>
                     <h1>Meus hábitos</h1>
                     <IconContainer onClick={() => setCreateHabit(true)}>
-                        <FaPlus size={20} color="white" />
+                        <FaPlus size={35} color="white" />
                     </IconContainer>
                 </Flex>
                 <HabitsContainer>
-                    {createHabit ? <HabitInput isOpen={setCreateHabit} value={habitName} setValue={(value) => setHabitName(value)}/> : null}
+                    {createHabit ? <HabitInput isOpen={setCreateHabit} value={habitName} setValue={(value) => setHabitName(value)} /> : null}
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {
-                                console.log(data)
+                                { console.log(data) }
+                                return <Habit id={data.id} name={data.name} days={data.days} key={data.id}></Habit>
                             })
                     }
                 </HabitsContainer>

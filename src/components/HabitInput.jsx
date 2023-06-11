@@ -2,26 +2,44 @@
 import { styled } from "styled-components"
 import Input from "./Input";
 import COLORS from "../constants/colors";
+import { useState } from "react";
+import axios from "axios";
+import urlApi from "../constants/fetchApi";
+import { getUserDataFromLocals } from "../functions/saveonLocals";
+import WEEKDAYS from "../constants/weekdays";
 
-export default function HabitInput({isOpen, value, setValue}) {
+export default function HabitInput({ isOpen, value, setValue }) {
 
-    const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"]
+    const [selectDay, setSelectDay] = useState([])
+
+    function createHabit() {
+        const { token } = getUserDataFromLocals()
+        axios.post(`${urlApi}/habits`, { name: value, days: selectDay }, { headers: { Authorization: `Bearer ${token}` } })
+    }
 
     return (
         <>
             <Main>
-                <Input 
-                type="text"
-                placeholder="nome do hábito" 
-                value={value}
-                setValue={setValue}
+                <Input
+                    type="text"
+                    placeholder="nome do hábito"
+                    value={value}
+                    setValue={setValue}
                 />
 
-                {weekDays.map((day, i) => <WeekBtn key={i}>{day}</WeekBtn>)}
+                {
+                    WEEKDAYS.map((day, i) =>
+                        <WeekBtn
+                            key={i}
+                            onClick={() => setSelectDay([...selectDay, i])}
+                            disabled={selectDay.includes(i) ? true : false}
+
+                        >{day}</WeekBtn>)
+                }
 
                 <ButtonsContainer>
-                    <h2 onClick={()=> isOpen(false)}> Cancelar</h2>
-                    <button>Salvar</button>
+                    <h2 onClick={() => isOpen(false)}> Cancelar</h2>
+                    <button onClick={() => createHabit()}>Salvar</button>
                 </ButtonsContainer>
             </Main>
         </>
@@ -31,6 +49,7 @@ const Main = styled.div`
     background-color: white;
     padding: 15px;
     border-radius: 5px;
+
 `
 const WeekBtn = styled.button`
     margin: 2px;
@@ -41,6 +60,11 @@ const WeekBtn = styled.button`
     background-color: white;
     color: ${COLORS.INPUTTEXT};
     border: 1px solid ${COLORS.INPUTTEXT};
+
+    &:disabled{
+        background-color: ${COLORS.DISABLED};
+        color: white;
+    }
 `
 const ButtonsContainer = styled.div`
     width: 100%;
@@ -60,4 +84,5 @@ const ButtonsContainer = styled.div`
     h2{
         color: ${COLORS.SECONDARY};
     }
+
 `

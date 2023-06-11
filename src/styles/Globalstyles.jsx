@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${FONTS.PRIMARY};
     color: white;
     font-weight: 400;
+    box-sizing: border-box;
   }
   input{
     &:focus{
