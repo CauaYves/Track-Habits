@@ -15,6 +15,7 @@ export default function Home() {
     const navigate = useNavigate()
     const [habits, setHabits] = useState([])
     const [createHabit, setCreateHabit] = useState(false)
+    const [habitName, setHabitName] = useState("")
 
     useEffect(() => {
         const { token } = getUserDataFromLocals()
@@ -36,7 +37,7 @@ export default function Home() {
                     </IconContainer>
                 </Flex>
                 <HabitsContainer>
-                    {createHabit ? <HabitInput isOpen={setCreateHabit} /> : null}
+                    {createHabit ? <HabitInput isOpen={setCreateHabit} value={habitName} setValue={(value) => setHabitName(value)}/> : null}
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {

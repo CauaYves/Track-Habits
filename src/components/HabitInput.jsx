@@ -3,15 +3,22 @@ import { styled } from "styled-components"
 import Input from "./Input";
 import COLORS from "../constants/colors";
 
-export default function HabitInput({isOpen}) {
+export default function HabitInput({isOpen, value, setValue}) {
 
     const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"]
 
     return (
         <>
             <Main>
-                <Input placeholder="nome do hábito" />
+                <Input 
+                type="text"
+                placeholder="nome do hábito" 
+                value={value}
+                setValue={setValue}
+                />
+
                 {weekDays.map((day, i) => <WeekBtn key={i}>{day}</WeekBtn>)}
+
                 <ButtonsContainer>
                     <h2 onClick={()=> isOpen(false)}> Cancelar</h2>
                     <button>Salvar</button>
