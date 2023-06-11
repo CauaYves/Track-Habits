@@ -14,7 +14,7 @@ export default function FormButton({ text, loading }) {
 }
 
 const ButtonContainer = styled.button`
-    background-color: ${COLORS.BUTTONS};
+    background-color: ${COLORS.SECONDARY};
 
     width: 100%;
     height: 45px;

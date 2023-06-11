@@ -16,7 +16,7 @@ const LinkAnchor = styled.div`
     justify-content: center;
     padding: 10px 0px;
     a{
-        color: ${COLORS.BUTTONS};
+        color: ${COLORS.SECONDARY};
         font-family: ${FONTS.PRIMARY};
     }
 `

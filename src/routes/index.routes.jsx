@@ -1,9 +1,13 @@
 import { useRoutes } from "react-router-dom"
-import Singup from "../pages/SINGUP/Singup"
+import Login from "../pages/LOGIN/Login"
+import Signup from "../pages/SIGNUP/Signup"
+import Home from "../pages/HOMEPAGE/Home"
 
 const Routes = () => {
     return useRoutes([
-        {path: "/cadastro", element: <Singup/>},
+        {path: "/cadastro", element: <Signup/>},
+        {path: "/login", element: <Login/>},
+        {path: "/", element: <Home/>}
     ])
 }
 export default Routes

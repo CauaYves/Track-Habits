@@ -8,9 +8,7 @@ import axios from "axios";
 import urlApi from "../../constants/fetchApi"
 import { useNavigate } from "react-router-dom";
 
-console.log("https://yt3.googleusercontent.com/ytc/AGIKgqOE2odAevc22sdCkQsZ3of410-sHBKA5ZhjeBxaZQ=s900-c-k-c0x00ffffff-no-rj")
-
-export default function Singup() {
+export default function Signup() {
     const navigate = useNavigate()
 
     const [loading, setLoading] = useState(false)
@@ -18,13 +16,13 @@ export default function Singup() {
         email: "",
         password: "",
         name: "",
-        img: ""
+        image: ""
     })
 
     function signupUser(e) {
         e.preventDefault()
         axios
-            .post(`${urlApi}/sign-up`)
+            .post(`${urlApi}/auth/sign-up`, forms)
             .then(navigate("/login"))
 
     }
@@ -37,7 +35,7 @@ export default function Singup() {
                 <Input placeholder="email" type="email" value={email} setValue={(value) => setForms({ ...forms, email: value })} on={loading} />
                 <Input placeholder="senha" type="password" value={password} setValue={(value) => setForms({ ...forms, password: value })} on={loading} />
                 <Input placeholder="nome" type="text" value={name} setValue={(value) => setForms({ ...forms, name: value })} on={loading} />
-                <Input placeholder="foto" type="url" value={img} setValue={(value) => setForms({ ...forms, img: value })} on={loading} />
+                <Input placeholder="foto" type="url" value={img} setValue={(value) => setForms({ ...forms, image: value })} on={loading} />
                 <div onClick={() => setLoading(true)} type="submit" >
                     <FormButton text="Cadastrar" loading={loading} />
                 </div>

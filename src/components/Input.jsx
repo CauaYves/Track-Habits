@@ -25,7 +25,7 @@ const InputContainer = styled.div`
         width: 100%;
         height: 45px;
 
-        border: 1px solid ${COLORS.BORDERINPUT};
+        border: 1px solid ${COLORS.PRIMARY};
         border-radius: 5px;
         &:disabled{
             background-color: ${COLORS.DISABLEDINPUT};

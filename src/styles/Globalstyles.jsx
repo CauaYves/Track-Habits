@@ -1,14 +1,14 @@
 import { createGlobalStyle } from "styled-components";
+import FONTS from "../constants/fonts";
 
 export const GlobalStyle = createGlobalStyle`
   *{
     font-size: large;
-  }
-
-  body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: ${FONTS.PRIMARY};
+    color: white;
+    font-weight: 400;
   }
   input{
     &:focus{
