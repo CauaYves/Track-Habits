@@ -5,7 +5,8 @@ const COLORS = {
     TEXT: "#666666",
     INPUTTEXT: "#DBDBDB",
     BACKGROUND: "#E5E5E5",
-    DISABLED: "#CFCFCF"
+    DISABLED: "#CFCFCF",
+    SUCESS: "#8FC549"
 }
 // eslint-disable-next-line react-refresh/only-export-components
 export default COLORS

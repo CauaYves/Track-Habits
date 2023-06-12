@@ -42,7 +42,6 @@ export default function Home() {
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {
-                                { console.log(data) }
                                 return <Habit id={data.id} name={data.name} days={data.days} key={data.id}></Habit>
                             })
                     }

@@ -15,7 +15,7 @@ export default function TrackBar() {
         <>
             <Main>
                 <Link to="/habitos">Hábitos</Link>
-                <ProgressContainer>
+                <ProgressContainer href="/hoje">
                     <CircularProgressbar value={70} text={`Hoje`} styles={styles} />
                 </ProgressContainer>
                 <Link to="/historico">Histórico</Link>
@@ -40,7 +40,7 @@ const Main = styled.div`
         text-decoration: none;
     }
 `
-const ProgressContainer = styled.div`
+const ProgressContainer = styled.a`
     width: 90px;
     position: absolute;
     top: -40px;

@@ -3,13 +3,13 @@ import { styled } from "styled-components"
 import WEEKDAYS from "../constants/weekdays";
 import COLORS from "../constants/colors";
 import trash from "../assets/trash.png"
+import { deleteHabit } from "../functions/habits";
 
 export default function Habit({ id, name, days }) { //days = array
-    console.log(id)
     return (
         <Main>
             <div>
-                <img src={trash} alt="trash"/>
+                <img src={trash} alt="trash" onClick={() => deleteHabit(id)}/>
                 <h1>{name}</h1>
             </div>
             <div>
@@ -39,6 +39,7 @@ const Main = styled.div`
 
     >div{
         img{
+            cursor: pointer;
             position: absolute;
             right: 30px;
         }
