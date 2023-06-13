@@ -9,7 +9,7 @@ import { getUserDataFromLocals } from "../functions/saveonLocals";
 import WEEKDAYS from "../constants/weekdays";
 import { PulseLoader } from "react-spinners";
 
-export default function HabitInput({ isOpen, value, setValue, close }) {
+export default function HabitInput({ isOpen, value, setValue, close, setHabitName }) {
 
     const [loading, setLoading] = useState(false)
     const [selectDay, setSelectDay] = useState([])
@@ -19,7 +19,7 @@ export default function HabitInput({ isOpen, value, setValue, close }) {
         axios
             .post(`${urlApi}/habits`, { name: value, days: selectDay }, { headers: { Authorization: `Bearer ${token}` } })
             .then(() => close(false))
-            .finally(() => {setLoading(false); isOpen("")})
+            .finally(() => { setLoading(false); isOpen("") })
     }
 
     return (
@@ -43,9 +43,9 @@ export default function HabitInput({ isOpen, value, setValue, close }) {
                 }
 
                 <ButtonsContainer>
-                    <h2 onClick={() => isOpen(false)}> Cancelar</h2>
+                    <h2 onClick={() => { isOpen(false); setHabitName("") }}> Cancelar</h2>
                     {
-                        loading ? <div><PulseLoader color="WHITE" /></div> : <button onClick={() => { createHabit(); setLoading(true) }}>Salvar</button>
+                        loading ? <div><PulseLoader color="WHITE" /></div> : <button onClick={() => { createHabit(); setLoading(true); setHabitName("")}}>Salvar</button>
                     }
                 </ButtonsContainer>
             </Main>

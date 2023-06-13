@@ -21,7 +21,6 @@ export default function Home() {
     useEffect(() => {
         const { token } = getUserDataFromLocals()
         if (!token) navigate("/")
-        console.log(1)
         axios
             .get(`${urlApi}/habits`, { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setHabits(res.data))
@@ -38,7 +37,7 @@ export default function Home() {
                     </IconContainer>
                 </Flex>
                 <HabitsContainer>
-                    {createHabit ? <HabitInput isOpen={setCreateHabit} value={habitName} setValue={(value) => setHabitName(value)} close={setCreateHabit} /> : null}
+                    {createHabit ? <HabitInput isOpen={setCreateHabit} value={habitName} setValue={(value) => setHabitName(value)} close={setCreateHabit} setHabitName={setHabitName}/> : null}
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {
