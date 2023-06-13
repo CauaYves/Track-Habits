@@ -25,7 +25,7 @@ export default function Home() {
         axios
             .get(`${urlApi}/habits`, { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setHabits(res.data))
-    }, [navigate])
+    }, [habits, navigate])
 
     return (
         <Main>
@@ -38,7 +38,7 @@ export default function Home() {
                     </IconContainer>
                 </Flex>
                 <HabitsContainer>
-                    {createHabit ? <HabitInput isOpen={setCreateHabit} value={habitName} setValue={(value) => setHabitName(value)} /> : null}
+                    {createHabit ? <HabitInput isOpen={setCreateHabit} value={habitName} setValue={(value) => setHabitName(value)} close={setCreateHabit}/> : null}
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {

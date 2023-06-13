@@ -7,14 +7,19 @@ import axios from "axios";
 import urlApi from "../constants/fetchApi";
 import { getUserDataFromLocals } from "../functions/saveonLocals";
 import WEEKDAYS from "../constants/weekdays";
+import { PulseLoader } from "react-spinners";
 
-export default function HabitInput({ isOpen, value, setValue }) {
+export default function HabitInput({ isOpen, value, setValue, close }) {
 
+    const [loading, setLoading] = useState(false)
     const [selectDay, setSelectDay] = useState([])
 
     function createHabit() {
         const { token } = getUserDataFromLocals()
-        axios.post(`${urlApi}/habits`, { name: value, days: selectDay }, { headers: { Authorization: `Bearer ${token}` } })
+        axios
+            .post(`${urlApi}/habits`, { name: value, days: selectDay }, { headers: { Authorization: `Bearer ${token}` } })
+            .then(() => close(false))
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -39,7 +44,9 @@ export default function HabitInput({ isOpen, value, setValue }) {
 
                 <ButtonsContainer>
                     <h2 onClick={() => isOpen(false)}> Cancelar</h2>
-                    <button onClick={() => createHabit()}>Salvar</button>
+                    {
+                        loading ? <div><PulseLoader color="WHITE" /></div> : <button onClick={() => { createHabit(); setLoading(true) }}>Salvar</button>
+                    }
                 </ButtonsContainer>
             </Main>
         </>
@@ -79,10 +86,17 @@ const ButtonsContainer = styled.div`
         background-color: ${COLORS.SECONDARY};
         padding: 6px 10px;
         border-radius: 5px;
-        margin-left: 20px;
     }
     h2{
+        margin-right: 20px;
         color: ${COLORS.SECONDARY};
+    }
+    >div{
+        background-color: ${COLORS.SECONDARY};
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 8px;
     }
 
 `

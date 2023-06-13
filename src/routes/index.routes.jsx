@@ -3,7 +3,7 @@ import Login from "../pages/LOGIN/Login"
 import Signup from "../pages/SIGNUP/Signup"
 import Home from "../pages/HOMEPAGE/Home"
 import Today from "../pages/TODAY/Today"
-import History from "../pages/HISTORICO/Historico"
+import History from "../pages/HISTORY/Historico"
 
 const Routes = () => {
     return useRoutes([
