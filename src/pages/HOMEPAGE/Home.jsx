@@ -7,9 +7,8 @@ import { FaPlus } from 'react-icons/fa';
 import FONTS from "../../constants/fonts"
 import COLORS from "../../constants/colors"
 import axios from "axios"
-import urlApi from "../../constants/fetchApi"
 import TrackBar from "../../components/TrackBar"
-import HabitInput from "../../components/habitInput"
+import HabitInput from "../../components/HabitInput"
 import Habit from "../../components/Habit"
 
 export default function Home() {
@@ -22,7 +21,7 @@ export default function Home() {
         const { token } = getUserDataFromLocals()
         if (!token) navigate("/")
         axios
-            .get(`${urlApi}/habits`, { headers: { Authorization: `Bearer ${token}` } })
+            .get(`${import.meta.env.VITE_API_URL}/habits`, { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setHabits(res.data))
     }, [createHabit, navigate])
 
@@ -56,8 +55,7 @@ const Main = styled.main`
     background-color: ${COLORS.BACKGROUND};
 `
 const HomeContainer = styled.main`
-    width: 91vw;
-    margin: auto;
+    padding: 0px 30px;
 `
 const Flex = styled.div`
     height: 80px;

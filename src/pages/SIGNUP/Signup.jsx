@@ -5,7 +5,6 @@ import FormButton from "../../components/FormButton";
 import Linkto from "../../components/Linkto";
 import { useState } from "react";
 import axios from "axios";
-import urlApi from "../../constants/fetchApi"
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
@@ -23,7 +22,7 @@ export default function Signup() {
     function signupUser(e) {
         e.preventDefault()
         axios
-            .post(`${urlApi}/auth/sign-up`, forms)
+            .post(`${import.meta.env.VITE_API_URL}/auth/sign-up`, forms)
             .then(res => {
                 if (res.status === 201) navigate("/")
             })

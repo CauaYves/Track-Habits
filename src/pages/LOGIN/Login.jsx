@@ -5,7 +5,6 @@ import FormButton from "../../components/FormButton";
 import Linkto from "../../components/Linkto";
 import { useState } from "react";
 import axios from "axios";
-import urlApi from "../../constants/fetchApi"
 import { useNavigate } from "react-router-dom";
 import { saveOnlocals } from "../../functions/saveonLocals";
 
@@ -22,7 +21,7 @@ export default function Login() {
     function signinUser(e) {
         e.preventDefault()
         axios
-            .post(`${urlApi}/auth/login`, forms)
+            .post(`${import.meta.env.VITE_API_URL}/auth/login`, forms)
             .then(res => {
                 saveOnlocals(res)
                 navigate("/habitos")

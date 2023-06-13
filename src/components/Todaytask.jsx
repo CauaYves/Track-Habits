@@ -3,7 +3,6 @@ import { styled } from "styled-components"
 import { AiOutlineCheck } from 'react-icons/ai';
 import COLORS from "../constants/colors";
 import axios from "axios";
-import urlApi from "../constants/fetchApi";
 import configApi from "../constants/configApi";
 
 export default function Todaytask({ id, name, done, cSequence, hSequence, setRefresh, refresh }) {
@@ -12,7 +11,7 @@ export default function Todaytask({ id, name, done, cSequence, hSequence, setRef
         let booleanTask = "check"
         if (done) booleanTask = "uncheck"
         axios
-            .post(`${urlApi}/habits/${taskId}/${booleanTask}`, null, configApi)
+            .post(`${import.meta.env.VITE_API_URL}/habits/${taskId}/${booleanTask}`, null, configApi)
             .then(() => setRefresh(refresh + 1))
 
     }

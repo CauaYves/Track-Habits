@@ -5,7 +5,6 @@ import Todaytask from "../../components/Todaytask"
 import { useContext, useEffect, useState } from "react"
 import { getUserDataFromLocals } from "../../functions/saveonLocals"
 import axios from "axios"
-import urlApi from "../../constants/fetchApi"
 import COLORS from "../../constants/colors"
 import DateBox from "../../components/DateBox"
 import Contextapi from "../../context/Contextapi"
@@ -18,7 +17,7 @@ export default function Today() {
         const { token } = getUserDataFromLocals()
 
         axios
-            .get(`${urlApi}/habits/today`, { headers: { Authorization: `Bearer ${token}` } })
+            .get(`${import.meta.env.VITE_API_URL}/habits/today`, { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setHabits(res.data))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refresh])

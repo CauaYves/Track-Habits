@@ -4,7 +4,6 @@ import Input from "./Input";
 import COLORS from "../constants/colors";
 import { useState } from "react";
 import axios from "axios";
-import urlApi from "../constants/fetchApi";
 import { getUserDataFromLocals } from "../functions/saveonLocals";
 import WEEKDAYS from "../constants/weekdays";
 import { PulseLoader } from "react-spinners";
@@ -17,7 +16,7 @@ export default function HabitInput({ isOpen, value, setValue, close, setHabitNam
     function createHabit() {
         const { token } = getUserDataFromLocals()
         axios
-            .post(`${urlApi}/habits`, { name: value, days: selectDay }, { headers: { Authorization: `Bearer ${token}` } })
+            .post(`${import.meta.env.VITE_API_URL}/habits`, { name: value, days: selectDay }, { headers: { Authorization: `Bearer ${token}` } })
             .then(() => close(false))
             .finally(() => { setLoading(false); isOpen("") })
     }

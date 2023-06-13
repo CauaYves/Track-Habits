@@ -4,14 +4,13 @@ import WEEKDAYS from "../constants/weekdays";
 import COLORS from "../constants/colors";
 import trash from "../assets/trash.png"
 import { getUserDataFromLocals } from "../functions/saveonLocals";
-import urlApi from "../constants/fetchApi";
 import axios from "axios";
 
 export default function Habit({ id, name, days, refreshPage }) { //days = array
     function deleteHabit(habitId) {
         const { token } = getUserDataFromLocals()
         axios
-            .delete(`${urlApi}/habits/${habitId}`, { headers: { Authorization: `Bearer ${token}` } })
+            .delete(`${import.meta.env.VITE_API_URL}/habits/${habitId}`, { headers: { Authorization: `Bearer ${token}` } })
             .then(() => refreshPage(false))
     }
     return (
