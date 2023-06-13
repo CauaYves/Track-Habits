@@ -3,13 +3,21 @@ import { styled } from "styled-components"
 import WEEKDAYS from "../constants/weekdays";
 import COLORS from "../constants/colors";
 import trash from "../assets/trash.png"
-import { deleteHabit } from "../functions/habits";
+import { getUserDataFromLocals } from "../functions/saveonLocals";
+import urlApi from "../constants/fetchApi";
+import axios from "axios";
 
-export default function Habit({ id, name, days }) { //days = array
+export default function Habit({ id, name, days, refreshPage }) { //days = array
+    function deleteHabit(habitId) {
+        const { token } = getUserDataFromLocals()
+        axios
+            .delete(`${urlApi}/habits/${habitId}`, { headers: { Authorization: `Bearer ${token}` } })
+            .then(() => refreshPage(false))
+    }
     return (
         <Main>
             <div>
-                <img src={trash} alt="trash" onClick={() => deleteHabit(id)}/>
+                <img src={trash} alt="trash" onClick={() => deleteHabit(id)} />
                 <h1>{name}</h1>
             </div>
             <div>

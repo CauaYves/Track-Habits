@@ -1,11 +1,3 @@
-import axios from "axios"
-import urlApi from "../constants/fetchApi"
-import { getUserDataFromLocals } from "./saveonLocals"
-
-export function deleteHabit(habitId) {
-    const { token } = getUserDataFromLocals()
-    axios.delete(`${urlApi}/habits/${habitId}`, { headers: { Authorization: `Bearer ${token}` } })
-}
 export function today() {
     const currentDate = new Date();
 
