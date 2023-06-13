@@ -19,7 +19,7 @@ export default function HabitInput({ isOpen, value, setValue, close }) {
         axios
             .post(`${urlApi}/habits`, { name: value, days: selectDay }, { headers: { Authorization: `Bearer ${token}` } })
             .then(() => close(false))
-            .finally(() => setLoading(false))
+            .finally(() => {setLoading(false); isOpen("")})
     }
 
     return (
