@@ -12,6 +12,7 @@ import { saveOnlocals } from "../../functions/saveonLocals";
 export default function Login() {
     const navigate = useNavigate()
 
+    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [forms, setForms] = useState({
         email: "",
@@ -24,15 +25,19 @@ export default function Login() {
             .post(`${urlApi}/auth/login`, forms)
             .then(res => {
                 saveOnlocals(res)
-                navigate("/")
+                navigate("/habitos")
             })
+            .catch(err => setError(err.response.data.message))
+            .finally(setLoading(false))
 
     }
+    console.log(error)
 
     const { email, password } = forms
     return (
         <Container>
             <Logo />
+            <p>{error}</p>
             <form onSubmit={signinUser}>
                 <Input placeholder="email" type="email" value={email} setValue={(value) => setForms({ ...forms, email: value })} on={loading} />
                 <Input placeholder="senha" type="password" value={password} setValue={(value) => setForms({ ...forms, password: value })} on={loading} />
@@ -48,4 +53,12 @@ export default function Login() {
 const Container = styled.main`
     width: calc(100vw - 40px);
     margin: auto;
+    p{
+        color: black;
+        text-align: center;
+        background-color: #F74940;
+        opacity: .8;
+
+        border-radius: 5px;
+    }
 `

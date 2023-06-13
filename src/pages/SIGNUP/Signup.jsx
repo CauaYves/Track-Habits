@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function Signup() {
     const navigate = useNavigate()
 
+    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [forms, setForms] = useState({
         email: "",
@@ -23,7 +24,11 @@ export default function Signup() {
         e.preventDefault()
         axios
             .post(`${urlApi}/auth/sign-up`, forms)
-            .then(navigate("/login"))
+            .then(res => {
+                if (res.status === 201) navigate("/")
+            })
+            .catch(error => setError(error.response.data.message))
+            .finally(setLoading(false))
 
     }
 
@@ -31,6 +36,7 @@ export default function Signup() {
     return (
         <Container>
             <Logo />
+            {error}
             <form onSubmit={signupUser}>
                 <Input placeholder="email" type="email" value={email} setValue={(value) => setForms({ ...forms, email: value })} on={loading} />
                 <Input placeholder="senha" type="password" value={password} setValue={(value) => setForms({ ...forms, password: value })} on={loading} />
@@ -48,4 +54,12 @@ export default function Signup() {
 const Container = styled.main`
     width: calc(100vw - 40px);
     margin: auto;
+    p{
+        color: black;
+        text-align: center;
+        background-color: #F74940;
+        opacity: .8;
+
+        border-radius: 5px;
+    }
 `

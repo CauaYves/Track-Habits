@@ -8,7 +8,7 @@ import History from "../pages/HISTORICO/Historico"
 const Routes = () => {
     return useRoutes([
         {path: "/cadastro", element: <Signup/>},
-        {path: "/login", element: <Login/>},
+        {path: "/", element: <Login/>},
         {path: "/habitos", element: <Home/>},
         {path: "/hoje", element: <Today/>},
         {path: "/historico", element: <History/>}
