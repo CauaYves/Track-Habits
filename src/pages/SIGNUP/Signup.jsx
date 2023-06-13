@@ -45,7 +45,7 @@ export default function Signup() {
                 <div onClick={() => setLoading(true)} type="submit" >
                     <FormButton text="Cadastrar" loading={loading} />
                 </div>
-                <Linkto text="Já tem uma conta? Faça login" to="/login" />
+                <Linkto text="Já tem uma conta? Faça login" to="/" />
             </form>
         </Container>
     )

@@ -6,15 +6,15 @@ import axios from "axios";
 import urlApi from "../constants/fetchApi";
 import configApi from "../constants/configApi";
 
-
-export default function Todaytask({ id, name, done, cSequence, hSequence }) {
-    console.log(done)
+export default function Todaytask({ id, name, done, cSequence, hSequence, setRefresh, refresh }) {
 
     function endTask(taskId) {
         let booleanTask = "check"
-        if(done) booleanTask = "uncheck"
+        if (done) booleanTask = "uncheck"
+        axios
+            .post(`${urlApi}/habits/${taskId}/${booleanTask}`, null, configApi)
+            .then(res => setRefresh(refresh + 1))
 
-        axios.post(`${urlApi}/habits/${taskId}/${booleanTask}`, null, configApi)
     }
 
     return (
@@ -24,7 +24,11 @@ export default function Todaytask({ id, name, done, cSequence, hSequence }) {
                 <p>Sequência atual: {cSequence} dias</p>
                 <p>Seu recorde: {hSequence} dias</p>
             </Data>
-            <Check color={done ? `${COLORS.SUCESS}` : `${COLORS.DISABLED}` } onClick={() => endTask(id)}>
+            <Check
+                color={done ? `${COLORS.SUCESS}` : `${COLORS.DISABLED}`}
+                onClick={() => endTask(id)}
+
+            >
                 <AiOutlineCheck color="white" size={60} />
             </Check>
         </Main>

@@ -11,14 +11,15 @@ import DateBox from "../../components/DateBox"
 
 export default function Today() {
     const [habits, setHabits] = useState([])
-    console.log(habits)
+    const [refresh, setRefresh] = useState(0)
     useEffect(() => {
         const { token } = getUserDataFromLocals()
 
         axios
             .get(`${urlApi}/habits/today`, { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setHabits(res.data))
-    }, [])
+        console.log(habits)
+    }, [refresh])
 
     return (
         <Main>
@@ -29,7 +30,16 @@ export default function Today() {
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {
-                                return <Todaytask id={data.id} name={data.name} done={data.done} key={data.id} cSequence={data.currentSequence} hSequence={data.highestSequence}></Todaytask>
+                                return <Todaytask 
+                                id={data.id} 
+                                name={data.name} 
+                                done={data.done} 
+                                key={data.id} 
+                                cSequence={data.currentSequence} 
+                                hSequence={data.highestSequence}
+                                setRefresh={setRefresh}
+                                refresh={refresh}
+                                />
                             })
                     }
                 </HabitContainer>
@@ -51,4 +61,8 @@ const Content = styled.div`
     padding: 0px 15px;
 `
 const HabitContainer = styled.div`
+    >h1{
+        color: ${COLORS.TEXT};
+        margin: 30px 0px;
+    }
 `
