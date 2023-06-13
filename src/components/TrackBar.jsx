@@ -3,10 +3,15 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
 import COLORS from "../constants/colors";
+import { useContext } from "react";
+import Contextapi from "../context/Contextapi";
 
 
 // eslint-disable-next-line react/prop-types
-export default function TrackBar({percentage}) {
+export default function TrackBar() {
+
+    const {progressbar} = useContext(Contextapi)
+
     const styles = buildStyles({
         pathColor: `white`,
         textColor: 'white',
@@ -17,7 +22,7 @@ export default function TrackBar({percentage}) {
             <Main>
                 <Link to="/habitos">Hábitos</Link>
                 <ProgressContainer href="/hoje">
-                    <CircularProgressbar value={percentage} text={`Hoje`} styles={styles} />
+                    <CircularProgressbar value={progressbar} text={`Hoje`} styles={styles} />
                 </ProgressContainer>
                 <Link to="/historico">Histórico</Link>
             </Main>

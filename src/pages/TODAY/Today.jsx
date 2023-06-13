@@ -2,16 +2,18 @@ import { styled } from "styled-components"
 import HeaderBar from "../../components/HeaderBar"
 import TrackBar from "../../components/TrackBar"
 import Todaytask from "../../components/Todaytask"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getUserDataFromLocals } from "../../functions/saveonLocals"
 import axios from "axios"
 import urlApi from "../../constants/fetchApi"
 import COLORS from "../../constants/colors"
 import DateBox from "../../components/DateBox"
+import Contextapi from "../../context/Contextapi"
 
 export default function Today() {
     const [habits, setHabits] = useState([])
     const [refresh, setRefresh] = useState(0)
+    const { setProgressbar} = useContext(Contextapi)
     useEffect(() => {
         const { token } = getUserDataFromLocals()
 
@@ -28,7 +30,8 @@ export default function Today() {
         const taskValue = 100/done.length
 
         const tasksDone = done.filter(el => el === true)
-        return tasksDone.length * taskValue
+        const total = tasksDone.length * taskValue
+        setProgressbar(total)
     }
 
 

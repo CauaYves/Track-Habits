@@ -5,10 +5,10 @@ import { useState } from "react";
 
 export default function App() {
 
-  const [username, setUsername] = useState("Pessoa")
+  const [progressbar, setProgressbar] = useState(0)
 
   return (
-    <Contextapi.Provider value={{ username, setUsername }}>
+    <Contextapi.Provider value={{ progressbar, setProgressbar }}>
       <BrowserRouter>
         <Routes />
       </BrowserRouter>
