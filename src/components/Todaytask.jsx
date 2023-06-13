@@ -13,7 +13,7 @@ export default function Todaytask({ id, name, done, cSequence, hSequence, setRef
         if (done) booleanTask = "uncheck"
         axios
             .post(`${urlApi}/habits/${taskId}/${booleanTask}`, null, configApi)
-            .then(res => setRefresh(refresh + 1))
+            .then(() => setRefresh(refresh + 1))
 
     }
 
@@ -39,6 +39,7 @@ const Main = styled.div`
     border-radius: 5px;
     width: 100% ;
     padding: 15px;
+    margin: 10px 0px;
 
     display: flex;
     justify-content: space-between;

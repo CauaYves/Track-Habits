@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import COLORS from "../constants/colors";
 
 
-export default function TrackBar() {
+// eslint-disable-next-line react/prop-types
+export default function TrackBar({percentage}) {
     const styles = buildStyles({
         pathColor: `white`,
         textColor: 'white',
@@ -16,7 +17,7 @@ export default function TrackBar() {
             <Main>
                 <Link to="/habitos">Hábitos</Link>
                 <ProgressContainer href="/hoje">
-                    <CircularProgressbar value={70} text={`Hoje`} styles={styles} />
+                    <CircularProgressbar value={percentage} text={`Hoje`} styles={styles} />
                 </ProgressContainer>
                 <Link to="/historico">Histórico</Link>
             </Main>

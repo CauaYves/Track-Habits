@@ -18,8 +18,19 @@ export default function Today() {
         axios
             .get(`${urlApi}/habits/today`, { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setHabits(res.data))
-        console.log(habits)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refresh])
+
+
+    function calculatePercentage(task) {
+        const done = task.map((task) => task.done)   
+        
+        const taskValue = 100/done.length
+
+        const tasksDone = done.filter(el => el === true)
+        return tasksDone.length * taskValue
+    }
+
 
     return (
         <Main>
@@ -30,21 +41,21 @@ export default function Today() {
                     {
                         habits.length === 0 ? <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1> :
                             habits.map((data) => {
-                                return <Todaytask 
-                                id={data.id} 
-                                name={data.name} 
-                                done={data.done} 
-                                key={data.id} 
-                                cSequence={data.currentSequence} 
-                                hSequence={data.highestSequence}
-                                setRefresh={setRefresh}
-                                refresh={refresh}
+                                return <Todaytask
+                                    id={data.id}
+                                    name={data.name}
+                                    done={data.done}
+                                    key={data.id}
+                                    cSequence={data.currentSequence}
+                                    hSequence={data.highestSequence}
+                                    setRefresh={setRefresh}
+                                    refresh={refresh}
                                 />
                             })
                     }
                 </HabitContainer>
             </Content>
-            <TrackBar />
+            <TrackBar percentage={calculatePercentage(habits)} />
         </Main>
     )
 }
