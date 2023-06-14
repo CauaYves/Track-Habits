@@ -12,21 +12,25 @@ import Contextapi from "../../context/Contextapi"
 export default function Today() {
     const [habits, setHabits] = useState([])
     const [refresh, setRefresh] = useState(0)
-    const { setProgressbar} = useContext(Contextapi)
+    const { setProgressbar } = useContext(Contextapi)
+
     useEffect(() => {
         const { token } = getUserDataFromLocals()
 
         axios
             .get(`${import.meta.env.VITE_API_URL}/habits/today`, { headers: { Authorization: `Bearer ${token}` } })
-            .then(res => setHabits(res.data))
+            .then(res => {
+                setHabits(res.data)
+                calculatePercentage(res.data)
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refresh])
 
 
     function calculatePercentage(task) {
-        const done = task.map((task) => task.done)   
-        
-        const taskValue = 100/done.length
+        const done = task.map((task) => task.done)
+
+        const taskValue = 100 / done.length
 
         const tasksDone = done.filter(el => el === true)
         const total = tasksDone.length * taskValue
@@ -57,7 +61,7 @@ export default function Today() {
                     }
                 </HabitContainer>
             </Content>
-            <TrackBar percentage={calculatePercentage(habits)} />
+            <TrackBar percentage={() => calculatePercentage(habits)} />
         </Main>
     )
 }
