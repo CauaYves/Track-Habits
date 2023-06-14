@@ -7,7 +7,7 @@ import { getUserDataFromLocals } from "../../functions/saveonLocals"
 import axios from "axios"
 import COLORS from "../../constants/colors"
 import DateBox from "../../components/DateBox"
-import Contextapi from "../../context/Contextapi"
+import Contextapi from "../../context/contextapi"
 
 export default function Today() {
     const [habits, setHabits] = useState([])

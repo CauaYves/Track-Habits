@@ -4,7 +4,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
 import COLORS from "../constants/colors";
 import { useContext } from "react";
-import Contextapi from "../context/Contextapi";
+import Contextapi from "../context/contextapi";
 
 
 // eslint-disable-next-line react/prop-types

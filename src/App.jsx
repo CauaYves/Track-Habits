@@ -1,6 +1,6 @@
 import Routes from "./routes/index.routes";
 import { BrowserRouter } from "react-router-dom";
-import Contextapi from "./context/Contextapi"
+import Contextapi from "./context/contextapi"
 import { useState } from "react";
 
 export default function App() {
