@@ -36,7 +36,7 @@ export default function Habit({ id, name, days, refreshPage }) { //days = array
 const Main = styled.div`
     width: 100%;
     border-radius: 5px;
-    margin: 5px;
+    margin: 5px 0px;
     padding: 15px;
 
     background-color: white;
@@ -48,7 +48,7 @@ const Main = styled.div`
         img{
             cursor: pointer;
             position: absolute;
-            right: 30px;
+            right: 40px;
         }
         h1{
             margin: 0;
